@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Contact Customer</title>
+</head>
+<body>
+	<h1>App Contact</h1>
+	<div>
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Phone</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr th:each="user : ${Users}">
+				<td th:utext="${user.id}"></td>
+				<td th:utext="${user.username}">...</td>
+				<td th:utext="${user.phone}">...</td>
+				<td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
+				<td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+			</tr>
+		</table>
+
+	</div>
+	<form th:action="@{/register}" th:object="${User}" method="POST">
+		<input type="hidden" th:field="*{id}"/>
+		User Name: <br>	<input type="text" th:field="*{username}" /> <br />
+		Phone:	<br>	<input type="number" th:field="*{phone}" /> <br /><br>
+ 		<input	type="submit" value="Insert or Update" />
+	</form>
+</body>
+</html>
